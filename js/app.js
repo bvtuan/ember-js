@@ -15,7 +15,42 @@ App.CarView = Ember.View.extend({
   color: 'blue'
 });
 
- view.append('#ember166');
+ view.append();
+
+
+
+var view = Ember.View.create({
+  templateName: 'sayhello',
+  person: Ember.Object.create({
+    firstName: "Joy",
+    lastName: "Clojure"
+  })
+});
+
+view.append();
+
+
+
+
+
+App.SayHelloView = Ember.View.extend({
+  person: Ember.Object.create({
+    firstName: "Tuan",
+    lastName: "Bach Van"
+  }),
+  total :100,
+  logoUrl: 'http://vnexpress.net/Files/Subject/3b/bd/b7/b9/Khoc-01.jpg',
+   isDisabled: true,
+
+   edit: function(event) {
+    alert('ok');
+    //event.view.set('isEditing', true);
+  }
+
+});
+
+
+
 
 
 
@@ -67,3 +102,46 @@ Person.reopen({
 });
 //alert(Person.createMan().get('isMan') );// true
 
+
+
+/*
+App.UserView = Ember.View.extend({
+  templateName: 'user',
+  firstName: "Albert",
+  lastName: "Hofmann",
+  infoView: Ember.View.extend({
+    templateName: 'info',
+    posts: 25,
+    hobbies: "Riding bicycles"
+  })
+});
+
+*/
+
+App.UserView = Ember.View.extend({
+  templateName: 'user',
+  firstName: "Albert",
+  lastName: "Hofmann"
+});
+App.InfoView = Ember.View.extend({
+  posts: 25,
+  hobbies: "Riding bicycles"
+});
+
+
+
+App.userController = Ember.Object.create({
+  content: Ember.Object.create({
+    firstName: "Albert",
+    lastName: "Hofmann",
+    posts: 25,
+    hobbies: "Riding bicycles"
+  })
+});
+
+
+App.UserView1 = Ember.View.extend({
+  
+  firstNameBinding: 'App.userController.content.firstName',
+  lastNameBinding: 'App.userController.content.lastName'
+});

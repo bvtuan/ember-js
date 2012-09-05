@@ -24,13 +24,65 @@
     {{#view App.MyView}}
       <h1>Hello world!</h1>
     {{/view}}
-    My new car is {{App.carController.color}}.
 
+  {{#view App.SayHelloView}}
+    {{#if person}}
+    Welcome back, <b>{{person.firstName}} {{person.lastName}}</b>!
+    {{/if}}
+
+    {{#unless hasPaid}}
+      You owe: ${{total}}
+    {{/unless}}
+
+    <div id="logo">
+      <img {{bindAttr src="logoUrl"}} alt="Logo">
+    </div>
+
+    <input type="checkbox" {{bindAttr disabled="isDisabled"}}>
+
+    <a href="#" {{action "edit" }}>Edit</a>
+
+    {{/view}}
   </script>
 
    <script type="text/x-handlebars" data-template-name="say-hello">
       Hello, <b>{{name}}</b>
     </script>
+<script type="text/x-handlebars" data-template-name="sayhello">
+  {{#if person}}
+    Welcome back, <b>{{person.firstName}} {{person.lastName}}</b>!
+  {{else}}
+    Please log in.
+  {{/if}}
+</script>
+
+
+<script type="text/x-handlebars" >
+  {{#view App.UserView}}
+    User: {{firstName}} {{lastName}}
+    {{#view App.InfoView}}
+      <b>Posts:</b> {{posts}}
+      <br>
+      <b>Hobbies:</b> {{hobbies}}
+    {{/view}}
+
+
+  {{/view}}
+  
+</script>
+
+
+<script type="text/x-handlebars" >
+{{#view App.userController}}
+    User: {{firstName}} {{lastName}}
+  {{#view App.UserView1 postsBinding="App.userController.content.posts"  hobbiesBinding="App.userController.content.hobbies"}}
+    <b>Posts:</b> {{view.posts}}
+    <br>
+    <b>Hobbies:</b> {{view.hobbies}}
+  {{/view}}
+  {{/view}}
+</script>
+
 
   <!-- The missing protocol means that it will match the current protocol, either http or https. If running locally, we use the local jQuery. -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
